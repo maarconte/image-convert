@@ -14,7 +14,7 @@ const App: React.FC = () => {
     return new Promise((resolve, reject) => {
       const validTypes = ['image/png', 'image/jpeg', 'image/jpg'];
       if (!validTypes.includes(file.type)) {
-        reject(new Error('File is not a PNG or JPEG.'));
+        reject(new Error("Le fichier n'est ni un PNG ni un JPEG."));
         return;
       }
 
@@ -174,15 +174,15 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col items-center p-4 sm:p-6 lg:p-8">
       <header className="w-full max-w-3xl mb-8 text-center">
-        <h1 className="text-4xl font-bold font-heading text-accent">Image Converter</h1>
+        <h1 className="text-4xl font-bold font-heading text-accent">Convertisseur d'Images</h1>
         <p className="text-secondary-foreground mt-2">
-          Drag and drop your PNG or JPEG files below to convert them instantly.
+          Glissez-déposez vos fichiers PNG ou JPEG ci-dessous pour les convertir instantanément.
         </p>
       </header>
 
       <main className="w-full max-w-3xl">
         <div className="mb-6 flex items-center justify-center space-x-4">
-          <span className="text-primary-foreground font-medium">Output format:</span>
+          <span className="text-primary-foreground font-medium">Format de sortie :</span>
           <label className="flex items-center space-x-2 cursor-pointer text-secondary-foreground">
             <input type="radio" value="webp" checked={targetFormat === 'webp'} onChange={() => setTargetFormat('webp')} className="accent-accent w-4 h-4" />
             <span className={targetFormat === 'webp' ? 'text-accent font-medium' : ''}>WebP</span>
@@ -199,17 +199,17 @@ const App: React.FC = () => {
           <div className="mt-8">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold font-heading text-primary-foreground">
-                Conversion Queue ({files.filter(f=> f.status !== ConversionStatus.SUCCESS && f.status !== ConversionStatus.ERROR).length})
-                 / Completed ({files.filter(f=> f.status === ConversionStatus.SUCCESS || f.status === ConversionStatus.ERROR).length})
+                File d'attente ({files.filter(f=> f.status !== ConversionStatus.SUCCESS && f.status !== ConversionStatus.ERROR).length})
+                 / Terminés ({files.filter(f=> f.status === ConversionStatus.SUCCESS || f.status === ConversionStatus.ERROR).length})
               </h2>
               <div className="flex gap-2">
                 {files.some(f => f.status === ConversionStatus.SUCCESS) && (
                   <Button variant="accent" size="sm" onClick={handleDownloadAll}>
-                    Download All
+                    Tout télécharger
                   </Button>
                 )}
                 <Button variant="destructive" size="sm" onClick={handleClearAll}>
-                  Clear All
+                  Tout effacer
                 </Button>
               </div>
             </div>
@@ -220,7 +220,7 @@ const App: React.FC = () => {
         )}
       </main>
       <footer className="w-full max-w-3xl mt-12 text-center text-sm text-secondary-foreground">
-        <p>&copy; {new Date().getFullYear()} Image Converter. All conversions are done client-side in your browser.</p>
+        <p>&copy; {new Date().getFullYear()} Convertisseur d'Images. Toutes les conversions sont effectuées localement dans votre navigateur.</p>
       </footer>
     </div>
   );

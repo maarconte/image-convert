@@ -59,7 +59,7 @@ const FileItem: React.FC<FileItemProps> = ({ file, onRemove }) => {
 
       <div className="flex items-center space-x-2 flex-shrink-0 ml-4">
         {file.status === ConversionStatus.PENDING && (
-          <p className="text-xs text-yellow-400">Pending...</p>
+          <p className="text-xs text-yellow-400">En attente...</p>
         )}
         {file.status === ConversionStatus.CONVERTING && (
           <Spinner size="sm" className="text-accent" />
@@ -67,7 +67,7 @@ const FileItem: React.FC<FileItemProps> = ({ file, onRemove }) => {
         {file.status === ConversionStatus.SUCCESS && (
           <>
             <CheckCircleIcon className="w-5 h-5 text-green-400" />
-            <Button size="sm" variant="ghost" onClick={handleDownload} aria-label="Download File">
+            <Button size="sm" variant="ghost" onClick={handleDownload} aria-label="Télécharger le fichier">
               <DownloadIcon className="w-4 h-4" />
             </Button>
           </>
@@ -76,7 +76,7 @@ const FileItem: React.FC<FileItemProps> = ({ file, onRemove }) => {
           <>
             <XCircleIcon className="w-5 h-5 text-red-500" />
             <p className="text-xs text-red-500 truncate max-w-xs" title={file.errorMessage}>
-              {file.errorMessage || 'Conversion failed'}
+              {file.errorMessage || 'La conversion a échoué'}
             </p>
           </>
         )}

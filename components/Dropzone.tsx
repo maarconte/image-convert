@@ -86,10 +86,10 @@ const Dropzone: React.FC<DropzoneProps> = ({ onFilesAdded, accept }) => {
       />
       <UploadIcon className={`mx-auto mb-4 h-12 w-12 ${isDragging ? 'text-accent' : 'text-secondary-foreground'}`} />
       <p className={`text-lg font-semibold ${isDragging ? 'text-accent' : 'text-primary-foreground'}`}>
-        Drag & drop PNG or JPEG files here
+        Drag & drop vos fichiers PNG ou JPEG ici
       </p>
-      <p className="text-sm text-secondary-foreground">or click to select files</p>
-      {accept && <p className="text-xs text-secondary-foreground mt-2">Only {accept} files are accepted.</p>}
+      <p className="text-sm text-secondary-foreground">ou cliquez pour sélectionner des fichiers</p>
+      {accept && <p className="text-xs text-secondary-foreground mt-2">Seuls les fichiers {accept} sont acceptés.</p>}
     </div>
   );
 };
