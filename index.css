@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'NeueMachina';
+  src: url('/assets/fonts/NeueMachina-Regular.woff2') format('woff2'),
+       url('/assets/fonts/NeueMachina-Regular.woff') format('woff'),
+       url('/assets/fonts/NeueMachina-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NeueMachina';
+  src: url('/assets/fonts/NeueMachina-Light.woff2') format('woff2'),
+       url('/assets/fonts/NeueMachina-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NeueMachina';
+  src: url('/assets/fonts/NeueMachina-Ultrabold.woff2') format('woff2'),
+       url('/assets/fonts/NeueMachina-Ultrabold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SpaceMono';
+  src: url('/assets/fonts/SpaceMono-Regular.woff2') format('woff2'),
+       url('/assets/fonts/SpaceMono-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SpaceMono';
+  src: url('/assets/fonts/SpaceMono-Bold.woff2') format('woff2'),
+       url('/assets/fonts/SpaceMono-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}

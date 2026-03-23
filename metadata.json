@@ -1,0 +1,5 @@
+{
+  "name": "PNG to WebP Converter",
+  "description": "A simple and fast client-side tool to convert PNG images to WebP format. Supports drag & drop for multiple files.",
+  "requestFramePermissions": []
+}
