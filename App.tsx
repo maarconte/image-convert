@@ -8,6 +8,7 @@ import Button from './components/Button';
 import AppleIcon from './components/icons/AppleIcon';
 import WindowsIcon from './components/icons/WindowsIcon';
 import LogoTHATMUCH from './assets/img/LogoTHATMUCH_Footer.webp';
+import LogoFormatFlip from './assets/img/icon.png';
 
 const App: React.FC = () => {
   const [files, setFiles] = useState<ProcessedFile[]>([]);
@@ -187,7 +188,10 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col items-center p-4 sm:p-6 lg:p-8">
       <header className="w-full max-w-3xl mb-8 text-center">
-        <h1 className="text-6xl font-bold font-heading text-white mb-8 leading-tight">FormatFlip</h1>
+        <div className="flex items-center justify-center space-x-8 mb-8">
+          <img src={LogoFormatFlip} alt="FormatFlip" className="w-20" />
+          <h1 className="text-6xl font-bold font-heading text-white leading-tight">Format<span className="text-accent">Flip</span></h1>
+        </div>
         <p className="text-secondary-foreground mt-2">
           Glissez-déposez vos fichiers PNG ou JPEG ci-dessous pour les convertir instantanément.
         </p>
@@ -212,7 +216,7 @@ const App: React.FC = () => {
               <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center text-accent font-bold">W</div>
               <h3 className="text-xl font-bold font-heading text-white">WebP</h3>
             </div>
-            <p className="text-secondary-foreground text-sm leading-relaxed">
+            <p className="text-secondary-foreground text-sm leading-relaxed opacity-80">
               Le format développé par Google. Il offre une compression supérieure (<strong>jusqu'à 30%</strong> par rapport au JPEG) tout en conservant une qualité exceptionnelle. Il supporte également la transparence.
             </p>
           </div>
@@ -222,7 +226,7 @@ const App: React.FC = () => {
               <div className="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center text-pink-500 font-bold">A</div>
               <h3 className="text-xl font-bold font-heading text-white">AVIF</h3>
             </div>
-            <p className="text-secondary-foreground text-sm leading-relaxed">
+            <p className="text-secondary-foreground text-sm leading-relaxed opacity-80">
               La nouvelle génération. Basé sur le codec AV1, il est encore plus performant (<strong>jusqu'à 50%</strong> plus léger que le JPEG). C'est le choix idéal pour un web ultra-rapide.
             </p>
           </div>
@@ -272,7 +276,7 @@ const App: React.FC = () => {
         */}
       </main>
       <footer className="w-full max-w-3xl mt-12 text-center text-sm text-secondary-foreground">
-        <p>&copy; {new Date().getFullYear()} THATMUCH. FormatFlip. Toutes les conversions sont effectuées localement dans votre navigateur.</p>
+        <p className="text-xs opacity-50">&copy; {new Date().getFullYear()} THATMUCH. FormatFlip. Toutes les conversions sont effectuées localement dans votre navigateur.</p>
        <a href="https://thatmuch.fr" target="_blank" rel="noopener noreferrer"><img src={LogoTHATMUCH} alt="THATMUCH" className="w-32" /></a>
       </footer>
     </div>
