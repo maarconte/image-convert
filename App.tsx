@@ -5,6 +5,9 @@ import { ProcessedFile, ConversionStatus } from './types';
 import Dropzone from './components/Dropzone';
 import FileItem from './components/FileItem';
 import Button from './components/Button';
+import AppleIcon from './components/icons/AppleIcon';
+import WindowsIcon from './components/icons/WindowsIcon';
+import LogoTHATMUCH from './assets/img/LogoTHATMUCH_Footer.webp';
 
 const App: React.FC = () => {
   const [files, setFiles] = useState<ProcessedFile[]>([]);
@@ -171,10 +174,20 @@ const App: React.FC = () => {
     }
   }, [files]);
 
+  const handleDownloadApp = useCallback((os: 'mac' | 'windows') => {
+    const url = os === 'mac' ? '/downloads/ImageConverter-Mac.dmg' : '/downloads/ImageConverter-Windows.exe';
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = url.split('/').pop() || 'download';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col items-center p-4 sm:p-6 lg:p-8">
       <header className="w-full max-w-3xl mb-8 text-center">
-        <h1 className="text-4xl font-bold font-heading text-accent">Convertisseur d'Images</h1>
+        <h1 className="text-6xl font-bold font-heading text-white mb-8">Convertisseur d'Images</h1>
         <p className="text-secondary-foreground mt-2">
           Glissez-déposez vos fichiers PNG ou JPEG ci-dessous pour les convertir instantanément.
         </p>
@@ -218,9 +231,27 @@ const App: React.FC = () => {
             ))}
           </div>
         )}
+  {/*
+        <div className="mt-16 w-full text-center bg-secondary/30 rounded-xl p-8 border border-secondary shadow-sm">
+          <h2 className="text-2xl font-bold font-heading text-primary-foreground mb-3">Téléchargez l'Application Bureau</h2>
+          <p className="text-secondary-foreground mb-6">Le top pour des conversions illimitées, hors ligne et encore plus rapides directement depuis votre ordinateur.</p>
+
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+          <Button variant="outline" className="w-full sm:w-auto flex items-center justify-center gap-2" onClick={() => handleDownloadApp('mac')}>
+              <AppleIcon className="w-5 h-5 flex-shrink-0" />
+              <span>Version macOS</span>
+            </Button>
+            <Button variant="outline" className="w-full sm:w-auto flex items-center justify-center gap-2" onClick={() => handleDownloadApp('windows')}>
+              <WindowsIcon className="w-5 h-5 flex-shrink-0" />
+              <span>Version Windows</span>
+            </Button>
+          </div>
+        </div>
+        */}
       </main>
       <footer className="w-full max-w-3xl mt-12 text-center text-sm text-secondary-foreground">
-        <p>&copy; {new Date().getFullYear()} Convertisseur d'Images. Toutes les conversions sont effectuées localement dans votre navigateur.</p>
+        <p>&copy; {new Date().getFullYear()} THATMUCH. Convertisseur d'Images. Toutes les conversions sont effectuées localement dans votre navigateur.</p>
+       <a href="https://thatmuch.fr" target="_blank" rel="noopener noreferrer"><img src={LogoTHATMUCH} alt="THATMUCH" className="w-32" /></a>
       </footer>
     </div>
   );
