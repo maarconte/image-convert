@@ -198,38 +198,62 @@ const App: React.FC = () => {
       </header>
 
       <main className="w-full max-w-3xl">
-        <div className="mb-6 flex items-center justify-center space-x-4">
-          <span className="text-primary-foreground font-medium">Format de sortie :</span>
-          <label className="flex items-center space-x-2 cursor-pointer text-secondary-foreground">
-            <input type="radio" value="webp" checked={targetFormat === 'webp'} onChange={() => setTargetFormat('webp')} className="accent-accent w-4 h-4" />
-            <span className={targetFormat === 'webp' ? 'text-accent font-medium' : ''}>WebP</span>
-          </label>
-          <label className="flex items-center space-x-2 cursor-pointer text-secondary-foreground">
-            <input type="radio" value="avif" checked={targetFormat === 'avif'} onChange={() => setTargetFormat('avif')} className="accent-accent w-4 h-4" />
-            <span className={targetFormat === 'avif' ? 'text-accent font-medium' : ''}>AVIF</span>
-          </label>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 transition-all hover:bg-white/10 hover:border-accent/40 group">
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center text-accent font-bold">W</div>
-              <h3 className="text-xl font-bold font-heading text-white">WebP</h3>
+          <button 
+            onClick={() => setTargetFormat('webp')}
+            className={`text-left bg-white/5 backdrop-blur-sm border rounded-2xl p-6 transition-all hover:bg-white/10 group ${
+              targetFormat === 'webp' 
+                ? 'border-accent ring-1 ring-accent shadow-[0_0_20px_rgba(15,199,210,0.15)]' 
+                : 'border-white/10 opacity-60 hover:opacity-100 hover:border-white/20'
+            }`}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center space-x-3">
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold transition-colors ${
+                  targetFormat === 'webp' ? 'bg-accent text-primary' : 'bg-accent/20 text-accent'
+                }`}>W</div>
+                <h3 className="text-xl font-bold font-heading text-white">WebP</h3>
+              </div>
+              {targetFormat === 'webp' && (
+                <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center">
+                  <svg className="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+              )}
             </div>
-            <p className="text-secondary-foreground text-sm leading-relaxed opacity-80">
-              Le format développé par Google. Il offre une compression supérieure (<strong>jusqu'à 30%</strong> par rapport au JPEG) tout en conservant une qualité exceptionnelle. Il supporte également la transparence.
+            <p className="text-secondary-foreground text-sm leading-relaxed">
+              Le format de Google. Compression supérieure (<strong>jusqu'à 30%</strong> v. JPEG) sans perte de qualité visible. Supporte la transparence.
             </p>
-          </div>
+          </button>
 
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 transition-all hover:bg-white/10 hover:border-destructive/40 group">
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center text-pink-500 font-bold">A</div>
-              <h3 className="text-xl font-bold font-heading text-white">AVIF</h3>
+          <button 
+            onClick={() => setTargetFormat('avif')}
+            className={`text-left bg-white/5 backdrop-blur-sm border rounded-2xl p-6 transition-all hover:bg-white/10 group ${
+              targetFormat === 'avif' 
+                ? 'border-pink-500 ring-1 ring-pink-500 shadow-[0_0_20px_rgba(236,72,153,0.15)]' 
+                : 'border-white/10 opacity-60 hover:opacity-100 hover:border-white/20'
+            }`}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center space-x-3">
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold transition-colors ${
+                  targetFormat === 'avif' ? 'bg-pink-500 text-white' : 'bg-pink-500/20 text-pink-500'
+                }`}>A</div>
+                <h3 className="text-xl font-bold font-heading text-white">AVIF</h3>
+              </div>
+              {targetFormat === 'avif' && (
+                <div className="w-6 h-6 rounded-full bg-pink-500 flex items-center justify-center">
+                  <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+              )}
             </div>
-            <p className="text-secondary-foreground text-sm leading-relaxed opacity-80">
-              La nouvelle génération. Basé sur le codec AV1, il est encore plus performant (<strong>jusqu'à 50%</strong> plus léger que le JPEG). C'est le choix idéal pour un web ultra-rapide.
+            <p className="text-secondary-foreground text-sm leading-relaxed">
+              La nouvelle génération. Basé sur AV1, il est encore plus performant (<strong>jusqu'à 50%</strong> v. JPEG). Le choix du futur.
             </p>
-          </div>
+          </button>
         </div>
 
         <Dropzone onFilesAdded={handleFilesAdded} accept="image/png, image/jpeg, image/jpg" />
