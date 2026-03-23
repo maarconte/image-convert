@@ -187,7 +187,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col items-center p-4 sm:p-6 lg:p-8">
       <header className="w-full max-w-3xl mb-8 text-center">
-        <h1 className="text-6xl font-bold font-heading text-white mb-8">Convertisseur d'Images</h1>
+        <h1 className="text-6xl font-bold font-heading text-white mb-8 leading-tight">FormatFlip</h1>
         <p className="text-secondary-foreground mt-2">
           Glissez-déposez vos fichiers PNG ou JPEG ci-dessous pour les convertir instantanément.
         </p>
@@ -204,6 +204,28 @@ const App: React.FC = () => {
             <input type="radio" value="avif" checked={targetFormat === 'avif'} onChange={() => setTargetFormat('avif')} className="accent-accent w-4 h-4" />
             <span className={targetFormat === 'avif' ? 'text-accent font-medium' : ''}>AVIF</span>
           </label>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 transition-all hover:bg-white/10 hover:border-accent/40 group">
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center text-accent font-bold">W</div>
+              <h3 className="text-xl font-bold font-heading text-white">WebP</h3>
+            </div>
+            <p className="text-secondary-foreground text-sm leading-relaxed">
+              Le format développé par Google. Il offre une compression supérieure (<strong>jusqu'à 30%</strong> par rapport au JPEG) tout en conservant une qualité exceptionnelle. Il supporte également la transparence.
+            </p>
+          </div>
+
+          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 transition-all hover:bg-white/10 hover:border-destructive/40 group">
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center text-pink-500 font-bold">A</div>
+              <h3 className="text-xl font-bold font-heading text-white">AVIF</h3>
+            </div>
+            <p className="text-secondary-foreground text-sm leading-relaxed">
+              La nouvelle génération. Basé sur le codec AV1, il est encore plus performant (<strong>jusqu'à 50%</strong> plus léger que le JPEG). C'est le choix idéal pour un web ultra-rapide.
+            </p>
+          </div>
         </div>
 
         <Dropzone onFilesAdded={handleFilesAdded} accept="image/png, image/jpeg, image/jpg" />
@@ -250,7 +272,7 @@ const App: React.FC = () => {
         */}
       </main>
       <footer className="w-full max-w-3xl mt-12 text-center text-sm text-secondary-foreground">
-        <p>&copy; {new Date().getFullYear()} THATMUCH. Convertisseur d'Images. Toutes les conversions sont effectuées localement dans votre navigateur.</p>
+        <p>&copy; {new Date().getFullYear()} THATMUCH. FormatFlip. Toutes les conversions sont effectuées localement dans votre navigateur.</p>
        <a href="https://thatmuch.fr" target="_blank" rel="noopener noreferrer"><img src={LogoTHATMUCH} alt="THATMUCH" className="w-32" /></a>
       </footer>
     </div>

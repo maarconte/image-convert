@@ -1,5 +1,5 @@
 {
-  "name": "png-to-webp-converter",
+  "name": "formatflip",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -29,7 +29,7 @@
   },
   "build": {
     "appId": "com.imageconverter.desktop",
-    "productName": "Image Converter",
+    "productName": "FormatFlip",
     "directories": {
       "output": "release"
     },

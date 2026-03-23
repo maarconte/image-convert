@@ -18,7 +18,7 @@ export default {
         },
         secondary: {
           DEFAULT: '#482AA2',
-          foreground: 'hsl(215 20.2% 65.1%)', // text-slate-400
+          foreground: 'hsl(210 40% 98%)', // text-slate-400
         },
         accent: {
           DEFAULT: '#0FC7D2',
