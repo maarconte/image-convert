@@ -8,8 +8,9 @@ import Button from './components/Button';
 
 const App: React.FC = () => {
   const [files, setFiles] = useState<ProcessedFile[]>([]);
+  const [targetFormat, setTargetFormat] = useState<'webp' | 'avif'>('webp');
 
-  const convertToWebP = useCallback(async (file: File, quality: number = 0.85): Promise<Blob> => {
+  const convertToFormat = useCallback(async (file: File, format: 'webp' | 'avif', quality: number = 0.85): Promise<Blob> => {
     return new Promise((resolve, reject) => {
       const validTypes = ['image/png', 'image/jpeg', 'image/jpg'];
       if (!validTypes.includes(file.type)) {
@@ -35,10 +36,10 @@ const App: React.FC = () => {
               if (blob) {
                 resolve(blob);
               } else {
-                reject(new Error('Canvas toBlob failed to create WebP.'));
+                reject(new Error(`Canvas toBlob failed to create ${format.toUpperCase()}.`));
               }
             },
-            'image/webp',
+            `image/${format}`,
             quality
           );
         };
@@ -79,12 +80,12 @@ const App: React.FC = () => {
 
 
     try {
-      const webpBlob = await convertToWebP(currentFile.originalFile);
-      const webpName = currentFile.originalFile.name.replace(/\.(png|jpe?g)$/i, '.webp');
+      const outputBlob = await convertToFormat(currentFile.originalFile, targetFormat);
+      const outputName = currentFile.originalFile.name.replace(/\.(png|jpe?g)$/i, `.${targetFormat}`);
       setFiles(prevFiles =>
         prevFiles.map(f =>
           f.id === fileId
-            ? { ...f, status: ConversionStatus.SUCCESS, webpBlob, webpName, convertedSize: webpBlob.size }
+            ? { ...f, status: ConversionStatus.SUCCESS, outputBlob, outputName, convertedSize: outputBlob.size }
             : f
         )
       );
@@ -97,7 +98,7 @@ const App: React.FC = () => {
         )
       );
     }
-  }, [convertToWebP, files]); // Added files to dependency array for processFile
+  }, [convertToFormat, files, targetFormat]); // Added dependencies
 
 
   useEffect(() => {
@@ -146,12 +147,12 @@ const App: React.FC = () => {
   }, [files]);
 
   const handleDownloadAll = useCallback(async () => {
-    const successfulFiles = files.filter(f => f.status === ConversionStatus.SUCCESS && f.webpBlob && f.webpName);
+    const successfulFiles = files.filter(f => f.status === ConversionStatus.SUCCESS && f.outputBlob && f.outputName);
     if (successfulFiles.length === 0) return;
 
     const zip = new JSZip();
     successfulFiles.forEach(file => {
-      zip.file(file.webpName!, file.webpBlob!);
+      zip.file(file.outputName!, file.outputBlob!);
     });
 
     try {
@@ -173,13 +174,25 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col items-center p-4 sm:p-6 lg:p-8">
       <header className="w-full max-w-3xl mb-8 text-center">
-        <h1 className="text-4xl font-bold font-heading text-accent">Image to WebP Converter</h1>
+        <h1 className="text-4xl font-bold font-heading text-accent">Image Converter</h1>
         <p className="text-secondary-foreground mt-2">
-          Drag and drop your PNG or JPEG files below to convert them to WebP format instantly.
+          Drag and drop your PNG or JPEG files below to convert them instantly.
         </p>
       </header>
 
       <main className="w-full max-w-3xl">
+        <div className="mb-6 flex items-center justify-center space-x-4">
+          <span className="text-primary-foreground font-medium">Output format:</span>
+          <label className="flex items-center space-x-2 cursor-pointer text-secondary-foreground">
+            <input type="radio" value="webp" checked={targetFormat === 'webp'} onChange={() => setTargetFormat('webp')} className="accent-accent w-4 h-4" />
+            <span className={targetFormat === 'webp' ? 'text-accent font-medium' : ''}>WebP</span>
+          </label>
+          <label className="flex items-center space-x-2 cursor-pointer text-secondary-foreground">
+            <input type="radio" value="avif" checked={targetFormat === 'avif'} onChange={() => setTargetFormat('avif')} className="accent-accent w-4 h-4" />
+            <span className={targetFormat === 'avif' ? 'text-accent font-medium' : ''}>AVIF</span>
+          </label>
+        </div>
+
         <Dropzone onFilesAdded={handleFilesAdded} accept="image/png, image/jpeg, image/jpg" />
 
         {files.length > 0 && (
@@ -207,7 +220,7 @@ const App: React.FC = () => {
         )}
       </main>
       <footer className="w-full max-w-3xl mt-12 text-center text-sm text-secondary-foreground">
-        <p>&copy; {new Date().getFullYear()} Image to WebP Converter. All conversions are done client-side in your browser.</p>
+        <p>&copy; {new Date().getFullYear()} Image Converter. All conversions are done client-side in your browser.</p>
       </footer>
     </div>
   );

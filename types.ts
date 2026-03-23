@@ -10,8 +10,8 @@ export interface ProcessedFile {
   id: string;
   originalFile: File;
   status: ConversionStatus;
-  webpBlob?: Blob;
-  webpName?: string;
+  outputBlob?: Blob;
+  outputName?: string;
   originalSize: number;
   convertedSize?: number;
   errorMessage?: string;

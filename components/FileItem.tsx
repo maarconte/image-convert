@@ -24,11 +24,11 @@ const formatBytes = (bytes: number, decimals = 2) => {
 
 const FileItem: React.FC<FileItemProps> = ({ file, onRemove }) => {
   const handleDownload = () => {
-    if (file.webpBlob && file.webpName) {
-      const url = URL.createObjectURL(file.webpBlob);
+    if (file.outputBlob && file.outputName) {
+      const url = URL.createObjectURL(file.outputBlob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = file.webpName;
+      a.download = file.outputName;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -67,7 +67,7 @@ const FileItem: React.FC<FileItemProps> = ({ file, onRemove }) => {
         {file.status === ConversionStatus.SUCCESS && (
           <>
             <CheckCircleIcon className="w-5 h-5 text-green-400" />
-            <Button size="sm" variant="ghost" onClick={handleDownload} aria-label="Download WebP">
+            <Button size="sm" variant="ghost" onClick={handleDownload} aria-label="Download File">
               <DownloadIcon className="w-4 h-4" />
             </Button>
           </>
