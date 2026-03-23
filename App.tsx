@@ -9,10 +9,11 @@ import Button from './components/Button';
 const App: React.FC = () => {
   const [files, setFiles] = useState<ProcessedFile[]>([]);
 
-  const convertPngToWebP = useCallback(async (file: File, quality: number = 0.85): Promise<Blob> => {
+  const convertToWebP = useCallback(async (file: File, quality: number = 0.85): Promise<Blob> => {
     return new Promise((resolve, reject) => {
-      if (file.type !== 'image/png') {
-        reject(new Error('File is not a PNG.'));
+      const validTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+      if (!validTypes.includes(file.type)) {
+        reject(new Error('File is not a PNG or JPEG.'));
         return;
       }
 
@@ -78,8 +79,8 @@ const App: React.FC = () => {
 
 
     try {
-      const webpBlob = await convertPngToWebP(currentFile.originalFile);
-      const webpName = currentFile.originalFile.name.replace(/\.png$/i, '.webp');
+      const webpBlob = await convertToWebP(currentFile.originalFile);
+      const webpName = currentFile.originalFile.name.replace(/\.(png|jpe?g)$/i, '.webp');
       setFiles(prevFiles =>
         prevFiles.map(f =>
           f.id === fileId
@@ -96,7 +97,7 @@ const App: React.FC = () => {
         )
       );
     }
-  }, [convertPngToWebP, files]); // Added files to dependency array for processFile
+  }, [convertToWebP, files]); // Added files to dependency array for processFile
 
 
   useEffect(() => {
@@ -109,7 +110,7 @@ const App: React.FC = () => {
 
   const handleFilesAdded = useCallback((incomingFiles: File[]) => {
     const newProcessedFiles: ProcessedFile[] = incomingFiles
-      .filter(file => file.type === 'image/png') // Ensure only PNGs are added
+      .filter(file => ['image/png', 'image/jpeg', 'image/jpg'].includes(file.type)) // Ensure only valid images are added
       .filter(file => !files.some(existingFile => existingFile.originalFile.name === file.name && existingFile.originalFile.size === file.size)) // Avoid duplicates
       .map(file => {
         const previewUrl = URL.createObjectURL(file); // Create preview URL
@@ -172,14 +173,14 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col items-center p-4 sm:p-6 lg:p-8">
       <header className="w-full max-w-3xl mb-8 text-center">
-        <h1 className="text-4xl font-bold font-heading text-accent">PNG to WebP Converter</h1>
+        <h1 className="text-4xl font-bold font-heading text-accent">Image to WebP Converter</h1>
         <p className="text-secondary-foreground mt-2">
-          Drag and drop your PNG files below to convert them to WebP format instantly.
+          Drag and drop your PNG or JPEG files below to convert them to WebP format instantly.
         </p>
       </header>
 
       <main className="w-full max-w-3xl">
-        <Dropzone onFilesAdded={handleFilesAdded} accept="image/png" />
+        <Dropzone onFilesAdded={handleFilesAdded} accept="image/png, image/jpeg, image/jpg" />
 
         {files.length > 0 && (
           <div className="mt-8">
@@ -206,7 +207,7 @@ const App: React.FC = () => {
         )}
       </main>
       <footer className="w-full max-w-3xl mt-12 text-center text-sm text-secondary-foreground">
-        <p>&copy; {new Date().getFullYear()} PNG to WebP Converter. All conversions are done client-side in your browser.</p>
+        <p>&copy; {new Date().getFullYear()} Image to WebP Converter. All conversions are done client-side in your browser.</p>
       </footer>
     </div>
   );

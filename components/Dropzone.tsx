@@ -4,7 +4,7 @@ import UploadIcon from './icons/UploadIcon';
 
 interface DropzoneProps {
   onFilesAdded: (files: File[]) => void;
-  accept?: string; // e.g., "image/png"
+  accept?: string; // e.g., "image/png, image/jpeg"
 }
 
 const Dropzone: React.FC<DropzoneProps> = ({ onFilesAdded, accept }) => {
@@ -38,8 +38,8 @@ const Dropzone: React.FC<DropzoneProps> = ({ onFilesAdded, accept }) => {
     setIsDragging(false);
     const files = Array.from(e.dataTransfer.files);
     if (files && files.length > 0) {
-      const acceptedFiles = accept 
-        ? files.filter(file => file.type === accept) 
+      const acceptedFiles = accept
+        ? files.filter(file => accept.split(',').map(s => s.trim()).includes(file.type))
         : files;
       if (acceptedFiles.length > 0) {
         onFilesAdded(acceptedFiles);
@@ -51,8 +51,8 @@ const Dropzone: React.FC<DropzoneProps> = ({ onFilesAdded, accept }) => {
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
     if (files.length > 0) {
-        const acceptedFiles = accept 
-        ? files.filter(file => file.type === accept) 
+        const acceptedFiles = accept
+        ? files.filter(file => accept.split(',').map(s => s.trim()).includes(file.type))
         : files;
       if (acceptedFiles.length > 0) {
         onFilesAdded(acceptedFiles);
@@ -86,7 +86,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ onFilesAdded, accept }) => {
       />
       <UploadIcon className={`mx-auto mb-4 h-12 w-12 ${isDragging ? 'text-accent' : 'text-secondary-foreground'}`} />
       <p className={`text-lg font-semibold ${isDragging ? 'text-accent' : 'text-primary-foreground'}`}>
-        Drag & drop PNG files here
+        Drag & drop PNG or JPEG files here
       </p>
       <p className="text-sm text-secondary-foreground">or click to select files</p>
       {accept && <p className="text-xs text-secondary-foreground mt-2">Only {accept} files are accepted.</p>}
