@@ -199,11 +199,11 @@ const App: React.FC = () => {
 
       <main className="w-full max-w-3xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          <button 
+          <button
             onClick={() => setTargetFormat('webp')}
             className={`text-left bg-white/5 backdrop-blur-sm border rounded-2xl p-6 transition-all hover:bg-white/10 group ${
-              targetFormat === 'webp' 
-                ? 'border-accent ring-1 ring-accent shadow-[0_0_20px_rgba(15,199,210,0.15)]' 
+              targetFormat === 'webp'
+                ? 'border-accent ring-1 ring-accent shadow-[0_0_20px_rgba(15,199,210,0.15)]'
                 : 'border-white/10 opacity-60 hover:opacity-100 hover:border-white/20'
             }`}
           >
@@ -227,11 +227,11 @@ const App: React.FC = () => {
             </p>
           </button>
 
-          <button 
+          <button
             onClick={() => setTargetFormat('avif')}
             className={`text-left bg-white/5 backdrop-blur-sm border rounded-2xl p-6 transition-all hover:bg-white/10 group ${
-              targetFormat === 'avif' 
-                ? 'border-pink-500 ring-1 ring-pink-500 shadow-[0_0_20px_rgba(236,72,153,0.15)]' 
+              targetFormat === 'avif'
+                ? 'border-pink-500 ring-1 ring-pink-500 shadow-[0_0_20px_rgba(236,72,153,0.15)]'
                 : 'border-white/10 opacity-60 hover:opacity-100 hover:border-white/20'
             }`}
           >
@@ -251,7 +251,7 @@ const App: React.FC = () => {
               )}
             </div>
             <p className="text-secondary-foreground text-sm leading-relaxed">
-              La nouvelle génération. Basé sur AV1, il est encore plus performant (<strong>jusqu'à 50%</strong> v. JPEG). Le choix du futur.
+              La nouvelle génération d'image. Basé sur AV1, il est encore plus performant (<strong>jusqu'à 50%</strong> v. JPEG). Le choix du futur.
             </p>
           </button>
         </div>
