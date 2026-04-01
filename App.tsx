@@ -281,23 +281,6 @@ const App: React.FC = () => {
             ))}
           </div>
         )}
-  {/*
-        <div className="mt-16 w-full text-center bg-secondary/30 rounded-xl p-8 border border-secondary shadow-sm">
-          <h2 className="text-2xl font-bold font-heading text-primary-foreground mb-3">Téléchargez l'Application Bureau</h2>
-          <p className="text-secondary-foreground mb-6">Le top pour des conversions illimitées, hors ligne et encore plus rapides directement depuis votre ordinateur.</p>
-
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-          <Button variant="outline" className="w-full sm:w-auto flex items-center justify-center gap-2" onClick={() => handleDownloadApp('mac')}>
-              <AppleIcon className="w-5 h-5 flex-shrink-0" />
-              <span>Version macOS</span>
-            </Button>
-            <Button variant="outline" className="w-full sm:w-auto flex items-center justify-center gap-2" onClick={() => handleDownloadApp('windows')}>
-              <WindowsIcon className="w-5 h-5 flex-shrink-0" />
-              <span>Version Windows</span>
-            </Button>
-          </div>
-        </div>
-        */}
       </main>
       <footer className="w-full max-w-3xl mt-12 text-center text-sm text-secondary-foreground">
         <p className="text-xs opacity-50">&copy; {new Date().getFullYear()} THATMUCH. FormatFlip. Toutes les conversions sont effectuées localement dans votre navigateur.</p>
