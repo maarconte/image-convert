@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['SpaceMono', 'monospace'],
+        sans: ['Work Sans', 'sans-serif'],
         heading: ['NeueMachina', 'sans-serif'],
       },
       colors: {
